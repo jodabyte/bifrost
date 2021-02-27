@@ -1,0 +1,31 @@
+microphone: !microphone &microphone
+  sampling_rate: 16000
+  sample_format: int16
+  input_device_index: null
+  frames_per_buffer: null
+snowboy: !snowboy &snowboy
+  decoder_model: snowboy/jarvis.umdl
+  sensitivity: []
+  audio_gain: 1
+  apply_frontend: false
+sad: !sad &sad
+  vad_mode: 3
+  vad_sampling_rate: 16000
+  silence_threshold: 170
+  min_speech_duration_threshold: 100
+  max_speech_duration_threshold: 300
+  input_device_index: null
+  frames_per_buffer: 160
+deepspeech: !deepspeech &deepspeech
+  model: deepspeech/deepspeech-0.9.3-models.tflite
+  scorer: deepspeech/deepspeech-0.9.3-models.scorer
+  logger: !deepspeechlogger
+    enable: true
+    file: "/bifrost/logs/deepspeech.log"
+    format: "%(asctime)s - %(message)s"
+asr: !asr
+  source: *microphone
+  kws: *snowboy
+  sad: *sad
+  stt: *deepspeech
+  subscriber: 
