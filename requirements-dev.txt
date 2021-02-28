@@ -1,0 +1,11 @@
+# PyPI
+deepspeech==0.9.3
+pyyaml
+pyaudio
+webrtcvad
+gpiozero
+rpi.gpio
+
+# Local
+libs/snowboy-1.3.0-py3.7-none-any.whl
+libs/apa102-pi
