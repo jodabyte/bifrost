@@ -1,11 +1,16 @@
 import logging
 from pprint import pformat
 from typing import Any
+import os
 
 import yaml
 
 CONFIGS_DIRECTORY_PATH = "configs/"
 RESOURCES_DIRECTORY_PATH = "resources/"
+LOGS_DIRECTORY_PATH = "logs/"
+
+if not os.path.exists(LOGS_DIRECTORY_PATH):
+    os.makedirs(LOGS_DIRECTORY_PATH)
 
 
 class Handlers(yaml.YAMLObject):

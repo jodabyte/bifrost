@@ -1,0 +1,21 @@
+FROM python:3.7-buster
+
+RUN apt update
+RUN apt install -y portaudio19-dev libatlas-base-dev 
+
+COPY bifrost/libs/snowboy-1.3.0-py3.7-none-any.whl /tmp/
+COPY bifrost/libs/apa102-pi /tmp/apa102-pi
+COPY bifrost/libs/raspberry-gpio /tmp/raspberry-gpio
+
+COPY bifrost/asr/requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
+
+WORKDIR /bifrost
+COPY bifrost/resources resources/
+COPY bifrost/configs configs/
+
+COPY bifrost/asr/src asr/
+COPY bifrost/pycommons pycommons/
+
+ENV PYTHONPATH=/bifrost
+CMD [ "python", "asr/asr.py" ]

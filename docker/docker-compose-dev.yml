@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+    bifrost-asr:
+        image: bifrost/asr:latest
+        container_name: bifrost-asr
+        devices: 
+            - /dev/gpiomem:/dev/gpiomem     # GPIO
+            - /dev/snd:/dev/snd             # sound
+            - /dev/spidev0.0:/dev/spidev0.0 # LED
+            - /dev/spidev0.1:/dev/spidev0.1 # LED
+        build: 
+            context: ..
+            dockerfile: docker/dockerfile-asr
+    
+    mosquitto:
+        image: eclipse-mosquitto:latest
+        container_name: mosquitto
+        ports: 
+            - 1883:1883
+        volumes: 
+            - ./configs:/mosquitto/config
+    
+    portainer:
+        image: portainer/portainer-ce
+        container_name: portainer
+        restart: always
+        ports: 
+            - 9000:9000
+        volumes: 
+            - /var/run/docker.sock:/var/run/docker.sock

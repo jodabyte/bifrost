@@ -1,8 +1,11 @@
-build:
-	docker build -f bifrost/asr/Dockerfile -t bifrost/asr:latest .
+docker-build:
+	docker-compose -f docker/docker-compose-dev.yml build
+	
+docker-up:
+	docker-compose -f docker/docker-compose-dev.yml up -d
 
-run:
-	docker run --privileged --device /dev/snd:/dev/snd -v $$PWD/configs:/bifrost/configs -v $$PWD/resources:/bifrost/resources -v $$PWD/logs:/bifrost/logs bifrost/asr:latest
+docker-down:
+	docker-compose -f docker/docker-compose-dev.yml down -v
 
-clean-docker:
-	docker system prune -a -f --volumes
+docker-clean:
+	docker system prune -a --volumes -f

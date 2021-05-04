@@ -1,11 +1,12 @@
+# Local
+/tmp/snowboy-1.3.0-py3.7-none-any.whl
+/tmp/apa102-pi
+/tmp/raspberry-gpio
+
 # PyPI
 deepspeech==0.9.3
 pyyaml
 pyaudio
 webrtcvad
 gpiozero
-rpi.gpio
-
-# Local
-/tmp/snowboy-1.3.0-py3.7-none-any.whl
-/tmp/apa102-pi
+#rpi.gpio
