@@ -1,11 +1,11 @@
 import logging
+import os
 from pprint import pformat
 from typing import Any
-import os
 
 import yaml
 
-CONFIGS_DIRECTORY_PATH = "configs/"
+CONFIGS_DIRECTORY_PATH = "pycommons/config/"
 RESOURCES_DIRECTORY_PATH = "resources/"
 LOGS_DIRECTORY_PATH = "logs/"
 
@@ -52,7 +52,9 @@ if logging_config.debug:
 
 formatter = logging.Formatter(fmt=logging_config.format)
 
-file_handler = logging.FileHandler(logging_config.handlers.file, mode="w")
+file_handler = logging.FileHandler(
+    f"{LOGS_DIRECTORY_PATH}{logging_config.handlers.file}", mode="w"
+)
 file_handler.setFormatter(formatter)
 root_logger.addHandler(file_handler)
 if logging_config.handlers.console:
@@ -61,4 +63,4 @@ if logging_config.handlers.console:
     root_logger.addHandler(stream_handler)
 
 logger = logging.getLogger(__name__)
-logger.debug(f"config loaded {pformat(logging_config)}")
+logger.debug(f"Loaded global config: {pformat(logging_config)}")

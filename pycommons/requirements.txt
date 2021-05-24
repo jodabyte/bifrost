@@ -1,0 +1,7 @@
+/tmp/apa102-pi
+/tmp/raspberry-gpio
+
+pyaudio
+pyyaml
+gpiozero
+#rpi.gpio

@@ -1,0 +1,5 @@
+-r pycommons/requirements-dev.txt
+-r nlu/requirements.txt
+
+mypy
+black

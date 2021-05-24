@@ -2,5 +2,5 @@
 debug: true
 handlers: !Handlers
   console: true
-  file: "/bifrost/logs/service.log"
+  file: "service.log"
 format: "%(asctime)s [%(threadName)s] %(levelname)s %(module)s - %(message)s"
