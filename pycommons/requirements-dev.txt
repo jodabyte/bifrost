@@ -1,7 +1,0 @@
-pycommons/libs/apa102-pi
-pycommons/libs/raspberry-gpio
-
-pyaudio
-pyyaml
-gpiozero
-#rpi.gpio

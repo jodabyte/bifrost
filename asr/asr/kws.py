@@ -1,10 +1,8 @@
 import logging
 from threading import Event
 
-from pycommons.config import RESOURCES_DIRECTORY_PATH
+from pycommons.config.config import Config, RESOURCES_DIRECTORY_PATH
 from snowboy import snowboydecoder
-
-from config import Config
 
 logger: logging.Logger = logging.getLogger(__name__)
 

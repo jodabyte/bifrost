@@ -5,7 +5,7 @@ from types import TracebackType
 from typing import Dict, Generator, List, Optional, Type, Union
 
 import pyaudio
-from config import Config
+from pycommons.config.config import Config
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -41,6 +41,7 @@ def get_input_device_by_name(name: str) -> Union[Dict, None]:
     source.terminate()
     return device
 
+
 class Microphone:
     def __init__(self, config: Config) -> None:
         self.sampling_rate = config.source.sampling_rate
@@ -69,9 +70,7 @@ class Microphone:
             pyaudio.paContinue,
         )
 
-    def __call__(
-        self, input_device_index=None, frames_per_buffer=None
-    ) -> "Microphone":
+    def __call__(self, input_device_index=None, frames_per_buffer=None) -> "Microphone":
         logger.debug(
             f"params: input_device_index={input_device_index}, frames_per_buffer={frames_per_buffer}"
         )

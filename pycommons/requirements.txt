@@ -1,7 +1,8 @@
-/tmp/apa102-pi
-/tmp/raspberry-gpio
+pycommons/libs/apa102-pi
+pycommons/libs/raspberry-gpio
 
 pyaudio
 pyyaml
 gpiozero
+paho-mqtt==1.5.1
 #rpi.gpio

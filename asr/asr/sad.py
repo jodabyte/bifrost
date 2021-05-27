@@ -5,7 +5,7 @@ from typing import Callable, Deque, Dict
 
 import webrtcvad
 
-from config import Config
+from pycommons.config.config import Config
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -27,12 +27,8 @@ class SpeechActivityDetection:
         self.interrupt_event = interrupt_event
         self.vad = webrtcvad.Vad(config.sad.vad_mode)
         self.silence_threshold = config.sad.silence_threshold
-        self.min_speech_duration_threshold = (
-            config.sad.min_speech_duration_threshold
-        )
-        self.max_speech_duration_threshold = (
-            config.sad.max_speech_duration_threshold
-        )
+        self.min_speech_duration_threshold = config.sad.min_speech_duration_threshold
+        self.max_speech_duration_threshold = config.sad.max_speech_duration_threshold
         self.input_device_index = config.sad.input_device_index
         self.frames_per_buffer = config.sad.frames_per_buffer
         self.vad_sampling_rate = config.sad.vad_sampling_rate
@@ -51,12 +47,8 @@ class SpeechActivityDetection:
                         raise InterruptEvent()
 
                     recorded_speech.append(frames)
-                    is_speech = self.vad.is_speech(
-                        frames, self.vad_sampling_rate
-                    )
-                    logger.debug(
-                        f"frame has {'speech' if is_speech else 'no speech'}"
-                    )
+                    is_speech = self.vad.is_speech(frames, self.vad_sampling_rate)
+                    logger.debug(f"frame has {'speech' if is_speech else 'no speech'}")
 
                     if is_speech:
                         silence_counter = 0

@@ -4,15 +4,11 @@ from typing import Any, List, Tuple
 import paho.mqtt.client as mqtt
 from paho.mqtt.reasoncodes import PacketTypes, ReasonCodes
 
-import pycommons.config.config
-
 
 class MqttClient:
     def __init__(
         self,
         id: str,
-        host: str,
-        port: int = 1883,
         protocol: int = mqtt.MQTTv5,
         enable_logging: bool = True,
     ) -> None:
@@ -26,6 +22,12 @@ class MqttClient:
         self._client.on_publish = self._on_publish
         self._client.on_unsubscribe = self._on_unsubscribe
         self._client.on_disconnect = self._on_disconnect
+
+    def connect(
+        self,
+        host: str,
+        port: int = 1883,
+    ):
         error_code: int = self._client.connect(host=host, port=port, clean_start=True)
         self.logger.debug(
             f"Connected to broker with code='{mqtt.error_string(error_code)}'"

@@ -6,12 +6,11 @@ from enum import Enum, auto
 from pycommons.asr import States
 from pycommons.audio.seeed4micvoicecard import Seeed4micVoiceCard
 from pycommons.audio.source import Microphone
-from pycommons.config import load_config
+from pycommons.config.config import Config, load_config
 
-from config import Config
-from kws import Snowboy
-from sad import SpeechActivityDetection
-from stt import DeepSpeech
+from asr.asr.kws import Snowboy
+from asr.asr.sad import SpeechActivityDetection
+from asr.asr.stt import DeepSpeech
 
 
 class Handlers(Enum):
@@ -31,9 +30,7 @@ class Service:
 
         self.handlers = {
             Handlers.KWS: Snowboy(config, self.termination_event),
-            Handlers.SAD: SpeechActivityDetection(
-                config, self.termination_event
-            ),
+            Handlers.SAD: SpeechActivityDetection(config, self.termination_event),
             Handlers.STT: DeepSpeech(config),
             Handlers.SOURCE: Microphone(config),
         }
@@ -55,9 +52,7 @@ class Service:
                 self.handlers[Handlers.KWS]()
                 state = States.RECORD
             elif state is States.RECORD:
-                self.handlers[Handlers.SAD](
-                    session, self.handlers[Handlers.SOURCE]
-                )
+                self.handlers[Handlers.SAD](session, self.handlers[Handlers.SOURCE])
                 state = States.TRANSCRIPT
             elif state is States.TRANSCRIPT:
                 self.handlers[Handlers.STT](session)

@@ -4,9 +4,7 @@ from typing import Dict
 
 import deepspeech as ds
 import numpy as np
-from pycommons.config import RESOURCES_DIRECTORY_PATH
-
-from config import Config
+from pycommons.config.config import Config, RESOURCES_DIRECTORY_PATH
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -16,14 +14,10 @@ class DeepSpeech:
         def __init__(self, config: Config) -> None:
             if config.stt.logger.enable:
                 formatter = logging.Formatter(fmt=config.stt.logger.format)
-                file_handler = logging.FileHandler(
-                    config.stt.logger.file, mode="w"
-                )
+                file_handler = logging.FileHandler(config.stt.logger.file, mode="w")
                 file_handler.setFormatter(formatter)
 
-                self.logger: logging.Logger = logging.getLogger(
-                    "DeepSpeechLogger"
-                )
+                self.logger: logging.Logger = logging.getLogger("DeepSpeechLogger")
                 self.logger.propagate = False
                 self.logger.setLevel(logging.DEBUG)
                 self.logger.addHandler(file_handler)
@@ -33,12 +27,8 @@ class DeepSpeech:
                 self.logger.debug(message)
 
     def __init__(self, config: Config) -> None:
-        self._model: ds.Model = ds.Model(
-            RESOURCES_DIRECTORY_PATH + config.stt.model
-        )
-        self._model.enableExternalScorer(
-            RESOURCES_DIRECTORY_PATH + config.stt.scorer
-        )
+        self._model: ds.Model = ds.Model(RESOURCES_DIRECTORY_PATH + config.stt.model)
+        self._model.enableExternalScorer(RESOURCES_DIRECTORY_PATH + config.stt.scorer)
 
         self.logger = self.DeepSpeechLogger(config)
 
