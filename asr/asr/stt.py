@@ -4,7 +4,7 @@ from typing import Dict
 
 import deepspeech as ds
 import numpy as np
-from pycommons.config.config import Config, RESOURCES_DIRECTORY_PATH
+from pycommons.config.config import RESOURCES_DIRECTORY_PATH, Config
 
 logger: logging.Logger = logging.getLogger(__name__)
 

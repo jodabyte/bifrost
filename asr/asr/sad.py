@@ -4,7 +4,6 @@ from threading import Event
 from typing import Callable, Deque, Dict
 
 import webrtcvad
-
 from pycommons.config.config import Config
 
 logger: logging.Logger = logging.getLogger(__name__)
