@@ -10,9 +10,6 @@ docker-down:
 docker-clean:
 	docker system prune -a --volumes -f
 
-pythonpath:
-	export PYTHONPATH=$(d)
-
 download-requirements:
 	pip install -r requirements-dev.txt
 

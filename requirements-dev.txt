@@ -1,5 +1,12 @@
--r pycommons/requirements-dev.txt
+# Python commons
+-r pycommons/requirements.txt
+
+# ASR
+-r asr/requirements.txt
+
+# NLU
 -r nlu/requirements.txt
 
+# DEV
 mypy
 black
